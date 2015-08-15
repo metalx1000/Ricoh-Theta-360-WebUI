@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Theta</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <script src="libs/jquery.min.js"></script>
+  <script src="libs/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $("#snapShot").click(function(){
+        $.get("cgi-bin/theta.py",function(data){
+          $("#msg").html(data); 
+        });
+      });
+
+      $(".delayShot").click(function(){
+	var delay = $(this).attr("count");
+	delay = delay*1000;
+
+        setTimeout(function(){
+          $.get("cgi-bin/theta.py",function(data){
+            $("#msg").html(data);
+          });
+	},delay);
+      });
+
+    });
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Take Photos</h2>
+  <button type="button" 
+	class="btn btn-primary btn-block" 
+	id="snapShot">Take Photo
+  </button>
+  <button type="button" 
+	class="btn btn-primary btn-block delayShot" 
+	count="3">Take Photo Delay 3 sec
+  </button>
+  <button type="button"
+        class="btn btn-primary btn-block delayShot" 
+        count="5">Take Photo Delay 5 sec
+  </button>
+  <button type="button"
+        class="btn btn-primary btn-block delayShot" 
+        count="10">Take Photo Delay 10 sec
+  </button>
+  <button type="button"
+        class="btn btn-primary btn-block delayShot" 
+        count="30">Take Photo Delay 30 sec
+  </button>
+
+  <div id="msg"></div>
+</div>
+
+</body>
+</html>
+
